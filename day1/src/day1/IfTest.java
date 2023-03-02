@@ -39,6 +39,10 @@ public class IfTest {
 			default:
 				System.out.println("grade F");
 		}
+		// 3항 연산
+		int result = (score > 70) ? 100 : 0; //(state)?true:false
+		System.out.println(result);
+		
 	} // end main()
 
 } // end class
