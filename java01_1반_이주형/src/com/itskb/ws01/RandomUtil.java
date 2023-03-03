@@ -4,15 +4,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class RandomUtil {
-
-	public static int getRandomInt1(int num1, int num2) {
+	static Random r = new Random();
+	public static int getRandomInt1(int from, int to) {
 		double f = Math.random()/Math.nextDown(1.0);
-		double x = num1*(1.0 - f) + num2*f;
+		double x = from*(1.0 - f) + to*f;
 		return (int) x;
 	}
-	public static int getRandomInt2(int num1, int num2) {
-		Random r = new Random();
-		int result = r.nextInt(num1, num2);
+	public static int getRandomInt2(int from, int to) {
+		int result = r.nextInt(from, to);
 		return result;
 	}
 }
