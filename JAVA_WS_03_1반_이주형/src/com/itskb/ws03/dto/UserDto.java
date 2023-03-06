@@ -14,4 +14,8 @@ public class UserDto {
 		this.phone = phone;
 		this.isSleep = isSleep;
 	}
+	public String toString() {
+		return "UserDto [userSeq=" + userSeq + ", name=" + name + ", email=" + email + ", phone=" + phone + ", isSleep="
+				+ isSleep + "]";
+	}
 }

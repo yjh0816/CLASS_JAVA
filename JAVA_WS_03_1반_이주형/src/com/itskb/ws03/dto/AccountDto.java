@@ -12,4 +12,10 @@ public class AccountDto {
 		this.balance = balance;
 		this.userSeq = userSeq;
 	}
+	
+	public String toString() {
+		return "AccountDto [accountSeq=" + accountSeq + ", accountNumber=" + accountNumber + ", balance=" + balance
+				+ ", userSeq=" + userSeq + "]";
+	}
+	
 }

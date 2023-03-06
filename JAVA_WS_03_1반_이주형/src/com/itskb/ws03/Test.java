@@ -9,9 +9,8 @@ public class Test {
 		BankService bs = new BankService();
 		AccountDto[] accountList = bs.getAccountList(1);
 		for(AccountDto ad: accountList) {
-			System.out.println(ad.accountSeq);
+			System.out.println(ad);
 		}
-		System.out.println(bs.getUserDetail(1).name);
+		System.out.println(bs.getUserDetail(1));
 	}
-
 }
