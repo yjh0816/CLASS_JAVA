@@ -20,9 +20,26 @@ public class Test5 {
 		mydate[2] = new MyDate(5,5);
 		mydate[3] = new MyDate(5,15);
 		mydate[4] = new MyDate(5,29);
+		
+		MyDate m = mydate[2];
+		System.out.println(m);
+		System.out.println(mydate[1]);
+		
+		// Print all
 		for(MyDate md : mydate) {
 			System.out.println(md);
 		}
+		for(int i=0; i<mydate.length; i++) {
+			System.out.println(mydate[i]);
+		}
+		
+		// Print only May
+		for(MyDate md : mydate) {
+			if (md.month == 5) {
+				System.out.println(md);	
+			}
+		}
+		
 	}
 
 }
