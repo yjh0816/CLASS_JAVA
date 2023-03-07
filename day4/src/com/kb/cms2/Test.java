@@ -8,8 +8,10 @@ public class Test {
 		mgr.save(new Bus("2222", 7000, 35));
 		mgr.save(new Bus("3333", 8000, 45));
 		mgr.search();
+		System.out.println("===================================");
 //		System.out.println(mgr.search("2222"));
-		
+		mgr.delete("2222");
+		mgr.search();
 	}
 
 }

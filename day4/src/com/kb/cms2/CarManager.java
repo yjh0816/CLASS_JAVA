@@ -39,7 +39,13 @@ public class CarManager {
 	}
 	
 	// 삭제
-	public void remove(Car c) {
-		cars.remove(c);
+	public void delete(String num) {
+		Car c = search(num);
+		if (c != null)	cars.remove(c);
+//		for(Car c: cars) {
+//			if (c.num.equals(num)) {
+//				cars.remove(c);
+//			}
+//		}
 	}
 }
