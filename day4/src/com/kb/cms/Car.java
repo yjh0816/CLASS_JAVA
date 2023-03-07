@@ -1,4 +1,4 @@
-package com.kb.sms;
+package com.kb.cms;
 
 public abstract class Car {
 	String num;

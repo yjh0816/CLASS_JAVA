@@ -1,4 +1,4 @@
-package com.kb.sms;
+package com.kb.cms;
 
 public class Bus extends Car implements Door {
 	int seat;

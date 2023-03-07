@@ -1,4 +1,4 @@
-package com.kb.sms;
+package com.kb.cms;
 
 public class Test2 {
 
