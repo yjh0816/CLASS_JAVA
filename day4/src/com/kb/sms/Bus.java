@@ -1,6 +1,6 @@
 package com.kb.sms;
 
-public class Bus extends Car {
+public class Bus extends Car implements Door {
 	int seat;
 	
 	public void drive() {
@@ -17,6 +17,16 @@ public class Bus extends Car {
 	@Override
 	public String toString() {
 		return "Bus [seat=" + seat + ", num=" + num + ", price=" + price + "]";
+	}
+	@Override
+	public void open() {
+		System.out.println("Door is opening...");
+		
+	}
+	@Override
+	public void close() {
+		System.out.println("Door is closing...");
+		
 	}
 	
 	

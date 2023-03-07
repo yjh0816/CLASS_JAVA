@@ -10,11 +10,12 @@ public class Test {
 //		c.drive(100);
 		System.out.println(c);
 		
-		Bus b = new Bus();
+		Car b = new Bus(); // polymorphism
 		b.num = "서울나5678";
 		b.price = 7000;
-		b.seat = 45;
+//		b.seat = 45;
 		b.drive();
+//		b.drive(100);
 		System.out.println(b);
 	}
 
