@@ -1,6 +1,7 @@
 package com.kb.cms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CustomerManager implements ICustMgr {
@@ -13,6 +14,13 @@ public class CustomerManager implements ICustMgr {
 //	2. 검색()
 	@Override
 	public void search() {
+		for(Customer c: cs) {
+			System.out.println(c);
+		}
+	}
+	public void sortedSearch() {
+//		Collections.sort(cs); // 이름으로 sort, Comparable 구현
+		Collections.sort(cs, new MyComparator("주소"));
 		for(Customer c: cs) {
 			System.out.println(c);
 		}

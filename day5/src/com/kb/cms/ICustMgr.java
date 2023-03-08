@@ -7,7 +7,8 @@ public interface ICustMgr {
 
 	//	2. 검색()
 	void search();
-
+	void sortedSearch();
+	
 	//	3. 상세검색()
 	Customer search(int num);
 
@@ -20,5 +21,6 @@ public interface ICustMgr {
 
 	//	5. 삭제()
 	void delete(int num);
+
 
 }

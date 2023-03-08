@@ -10,7 +10,8 @@ public class Test {
 		cm.save(new VipCustomer(2001, "KIM", "Daegu", "11가1234"));
 		cm.save(new VipCustomer(2002, "LEE", "Busan", "swim","22나5678"));
 		System.out.println("===== getUserList =====");
-		cm.search();
+//		cm.search();
+		cm.sortedSearch();
 		System.out.println("===== getUserDetail =====");
 		System.out.println(cm.search(1001));
 		System.out.println("===== updateUserAddress:Busan =====");
