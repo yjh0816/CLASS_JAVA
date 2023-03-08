@@ -3,19 +3,22 @@ package com.kb.cms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerManager {
+public class CustomerManager implements ICustMgr {
 	List<Customer> cs = new ArrayList<>();
 //	1. 저장()
+	@Override
 	public void save(Customer c) {
 		cs.add(c);
 	}
 //	2. 검색()
+	@Override
 	public void search() {
 		for(Customer c: cs) {
 			System.out.println(c);
 		}
 	}
 //	3. 상세검색()
+	@Override
 	public Customer search(int num) {
 		Customer result = null;
 		for(Customer c: cs) {
@@ -27,6 +30,7 @@ public class CustomerManager {
 		return result;
 	}
 //	4. 수정()
+	@Override
 	public void update(int num, String address) {
 		Customer result = search(num);
 		if (result != null) {
@@ -36,6 +40,7 @@ public class CustomerManager {
 		}
 	}
 //	5. 삭제()
+	@Override
 	public void delete(int num) {
 		Customer result = search(num);
 		if (result != null) {
