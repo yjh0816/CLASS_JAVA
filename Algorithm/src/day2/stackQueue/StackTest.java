@@ -14,20 +14,20 @@ public class StackTest {
 		stack.push(300);
 		stack.push(400);
 		stack.push(500);
-		System.out.println(stack.toString());
+		System.out.println("스택: " + stack.toString());
 		
 		// 1-2
 		int top = stack.pop();
-		System.out.println(top);
-		System.out.println(stack.toString());
+		System.out.println("제거된 값: " + top);
+		System.out.println("스택: " + stack.toString());
 		
 		// 1-3
 		top = stack.peek();
-		System.out.println(top);
+		System.out.println("맨 위의 값: " + top);
 		
 		// 1-4
 		while(!stack.isEmpty()) {
-			System.out.println(stack.pop());
+			System.out.println("제거된 값: " + stack.pop());
 		}
 	}
 
