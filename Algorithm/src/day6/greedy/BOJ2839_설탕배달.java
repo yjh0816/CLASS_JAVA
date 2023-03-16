@@ -1,4 +1,4 @@
-package day6;
+package day6.greedy;
 
 import java.util.Scanner;
 
