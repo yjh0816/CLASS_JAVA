@@ -22,7 +22,7 @@ public class AdjList {
 //		N = Integer.parseInt(br.readLine());
 //		E = Integer.parseInt(br.readLine());
 		N = sc.nextInt();
-      E = sc.nextInt();
+		E = sc.nextInt();
 		adjList = new ArrayList[N];
 		visited = new boolean[N];
 		
