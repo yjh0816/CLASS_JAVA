@@ -37,6 +37,26 @@ public class BOJ11724_연결요소의개수 {
 		}
 		System.out.println(count);
 		
+		count = 0;
+		visited = new boolean[N+1];
+		visited[1] = true;
+		for (int i = 1; i <= N; i++) {
+			if(!visited[i]) {
+				DFS(i);
+				count++;
+			}
+		}
+		System.out.println(count);
+	}
+	private static void DFS(int currNode) {
+//		System.out.print(currNode);
+		for(int node : adjList[currNode]) {
+			if(!visited[node]) {
+				visited[node] = true;
+				DFS(node);
+			}
+		}
+		
 	}
 	private static void BFS(int startNode) {
 		Queue<Integer> queue = new LinkedList();
