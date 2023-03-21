@@ -33,12 +33,12 @@ public class BOJ2178_미로탐색 {
 			}
 		}
 	    
-	    for (int i = 0; i < N; i++) {
-	    	System.out.println(Arrays.toString(map[i]));
-	    }
+//	    for (int i = 0; i < N; i++) {
+//	    	System.out.println(Arrays.toString(map[i]));
+//	    }
 
 	    BFS(0, 0);
-	    
+	    System.out.println(map[N-1][M-1]);
 	}
 
 	private static void BFS(int startX, int startY) {
@@ -51,21 +51,14 @@ public class BOJ2178_미로탐색 {
 			int currY = currNode[1];
 
 			for(int i = 0; i < 4; i++) {
-				int x = currX + dx[i];
-				int y = currY + dy[i];
-				if(x < 0 || x < 0 || N <= y || M <= y  ) {
-					continue;
+				int nextX = currX + dx[i];
+				int nextY = currY + dy[i];
+				if(0 <= nextX && nextX < N  && 0 <= nextY && nextY < M && map[nextX][nextY] != 0 && !visited[nextX][nextY]) {
+					visited[nextX][nextY] = true;
+					map[nextX][nextY] = map[currX][currY] + 1;
+					queue.offer(new int[] {nextX, nextY});
 				}
-				if(visited[x][y] || map[x][y] == 0){
-					continue;
-					
-				}
-				queue.add(new int[] {x, y});
-				map[x][y] = map[currX][currY] +1;
-				
-				visited[x][y] = true;
 			}
-
 			
 		}
 		
