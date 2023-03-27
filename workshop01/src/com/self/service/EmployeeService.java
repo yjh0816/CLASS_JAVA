@@ -1,110 +1,134 @@
 package com.self.service;
 
+import com.self.vo.Employee;
 import com.self.vo.Engineer;
 import com.self.vo.Manager;
 
 public class EmployeeService {
-	Manager[ ] ms;
-	int midx;
+	Employee[] emps;
+	int idx = 0;
 	
-	Engineer[ ] egs;
-	int egidx;	
+	private static EmployeeService service  = new EmployeeService(10);
+	private EmployeeService(int size){
+		emps = new Employee[size];
+	}
+	public static EmployeeService getInstance() {
+		return service;
+	}
+	public void addEmployee(Employee e) {	
+		emps[idx++] = e;
+	}
 
-	public EmployeeService(int size){
-		ms = new Manager[size];
-		egs = new Engineer[size];
-	}
-	public void addManager(Manager m) {	
-		ms[midx++] = m;
-	}
-	public void addEngineer(Engineer eg) {	
-		egs[egidx++] = eg;
-	}
-	public void deleteManager(String name) {	
-		for(int i=0; i<midx; i++) {
-			if(ms[i].getName().equals(name)) {
-				for(int j=i; j<midx; j++) {
-					ms[j] = ms[j+1];
+	public void deleteEmployee(String name) {
+		for(int i=0; i<idx; i++) {
+			if(emps[i].getName().equals(name)) {
+				for(int j=i; j<idx; j++) {
+					emps[j] = emps[j+1];
 				}
-				ms[midx] = null;
-				midx--;
+				emps[idx] = null;
+				idx--;
 			}
 		}
 	}
-	public void deleteEngineer(String name) {
-		for(int i=0; i<egidx; i++) {
-			if(egs[i].getName().equals(name)) {
-				for(int j=i; j<egidx; j++) {
-					egs[j] = egs[j+1];
-				}
-				egs[egidx] = null;
-				egidx--;
-			}
-		}
-	}
-	public void updateManager(double salary, String dept,int deptno,  String name) {	
-		for(Manager manager : ms) {	
-			if(manager==null) continue;
-			if(manager.getName().equals(name)) {
-				manager.setSalary(salary);
-				manager.setDept(dept);	
-				manager.setDeptno(deptno);				
+
+	public void updateEmployee(double salary,String name) {	
+		for(Employee employee : emps) {	
+			if(employee==null) continue;
+			if(employee.getName().equals(name)) {
+				employee.setSalary(salary);		
 			}			
 		}
 	}
-	public void updateEngineer(Engineer eg) {	
-		for(Engineer engineer : egs) {
-			if(engineer==null) continue;
-			if(engineer.getName().equals(eg.getName())) {
-				engineer.setBirthDate(eg.getBirthDate());
-				engineer.setBonus(eg.getBonus());
-				engineer.setSalary(eg.getSalary());
-				engineer.setTech(eg.getTech());
+	public void updateEmployee(String dept,int deptno, String name) {	
+		for(Employee employee : emps) {	
+			if(employee==null) continue;
+			if(employee instanceof Manager) {
+				if(employee.getName().equals(name)) {
+					((Manager) employee).setDept(dept);	
+					((Manager) employee).setDeptno(deptno);				
+				}	
 			}
 		}
-	}	
+	}
+	public void updateEmployee(String tech,double bonus, String name) {	
+		for(Employee employee : emps) {	
+			if(employee==null) continue;
+			if(employee instanceof Engineer) {
+				if(employee.getName().equals(name)) {
+					((Engineer) employee).setTech(tech);	
+					((Engineer) employee).setBonus(bonus);				
+				}	
+			}
+		}
+	}
+
 	//Method Overloading
 	/*
 	 * 하는일은 똑같은데...처리하는 데이타를 달리할때 쓰는 기법
 	 * 메소드의 통일감을 강조하면서도 서로다른 데이타를 처리할수 있게끔 해준다.
 	 */
-	public Manager findManager(String name) {
-		Manager m = null;
-		for(Manager manager : ms) {
-			if(manager==null) continue;			
-			if(manager.getName().equals(name))
-				m = manager;
+	public Employee findEmployee(String name) {
+		Employee e = null;
+		for(Employee employee : emps) {
+			if(employee==null) continue;			
+			if(employee.getName().equals(name))
+				e = employee;
 		}
-		return m;
+		return e;
 	}
-	public Manager[ ] findManager(int deptno) {
-		Manager[ ] temp = new Manager[ms.length];
+	public Employee[ ] findEmployee(int deptno) {
+		Employee[ ] temp = new Employee[emps.length];
 		int count = 0;
-		for(Manager manager : ms) {
-			if(manager==null) continue;
-			if(manager.getDeptno()==deptno) {
-				temp[count++] = manager;
+		for(Employee employee : emps) {
+			if(employee==null) continue;
+			if(employee instanceof Manager) {
+				if(((Manager) employee).getDeptno()==deptno) {
+					temp[count++] = employee;
+				}
 			}
 		}
 		return temp;
 	}
-	public Engineer findEngineer(String name) {
-		Engineer eg = null;
-		
-		return eg;
-	}	
+
 	//추가
-	public void printManagers() {		
-		for(Manager m : ms) {
-			if(m!=null)
-			System.out.println(m.getDetails());
+	public void printAllEmployee() {		
+		for(Employee e : emps) {
+			if(e!=null)
+			System.out.println(e);
 		}
 	}
-	public void printEngineers() {
-		for(Engineer e : egs) {
+	public void printEmployees(String job) {		
+		for(Employee e : emps) {
 			if(e!=null)
-			System.out.println(e.getDetails());
+			if(job.equals("m")) {
+				if(e instanceof Manager) {
+					System.out.println(e);
+				}
+			}
+			if(job.equals("e")) {
+				if(e instanceof Engineer) {
+					System.out.println(e);
+				}
+			}
 		}
+	}
+	public int getAnnualSalary(Employee e) {
+		int annualSalary = 0;
+		annualSalary = (int)(e.getSalary() * 12);
+		if (e instanceof Engineer) {
+			annualSalary = (int)(e.getSalary() * 12 + ((Engineer) e).getBonus());
+		}
+		return annualSalary;
+	}
+	
+
+	public int getTotalCost() {
+		int totalCost = 0;
+		for(Employee e : emps) {
+			if(e==null) continue;
+			totalCost += getAnnualSalary(e);
+		}
+		return totalCost;
 	}
 }
 
