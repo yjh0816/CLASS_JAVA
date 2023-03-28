@@ -2,6 +2,8 @@ package com.edu.test;
 
 import java.util.ArrayList;
 
+import com.edu.exception.DuplicateIDException;
+import com.edu.exception.RecordNotFoundException;
 import com.edu.service.impl.EmployeeListServiceImpl;
 import com.edu.vo.Employee;
 import com.edu.vo.Engineer;
@@ -24,19 +26,27 @@ public class EmployeeListServiceTest1 {
 		
 		System.out.println("\n========================Employee CRUD==================================\n");
 		System.out.println("\n======================== 1. insert ================================== ");
-		service.addEmployee(m1);
-		service.addEmployee(m2);				
-		
-		service.addEmployee(m3);
-		service.addEmployee(eg1);
-		service.addEmployee(eg2);
-		service.addEmployee(m3);
+		try {
+			service.addEmployee(m1);
+			service.addEmployee(m2);				
+			
+			service.addEmployee(m3);
+			service.addEmployee(eg1);
+			service.addEmployee(eg2);
+			service.addEmployee(m3);			
+		} catch (DuplicateIDException e) {
+			System.out.println(e.getMessage());
+		}
 		
 //		
 		service.findEmployees();
 				
 		System.out.println("\n======================== 2. delete ================================== ");
-		service.deleteEmployee("333");
+		try {
+			service.deleteEmployee("333");			
+		} catch (RecordNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 		service.findEmployees();
 		
 		System.out.println("\n======================== 3. update ================================== ");
