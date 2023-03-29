@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,vim,visualstudiocode,eclipse,java,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,vim,visualstudiocode,eclipse,java,intellij
 
+util
+sqldeveloper
+
 ### Eclipse ###
 .metadata
 bin/
