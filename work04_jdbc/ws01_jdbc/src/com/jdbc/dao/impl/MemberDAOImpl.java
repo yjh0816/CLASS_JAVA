@@ -43,7 +43,7 @@ public class MemberDAOImpl implements MemberDAO {
 		closeAll(conn, ps);
 	}
 	
-	private boolean ssnExist(int id, Connection conn) throws SQLException {
+	private boolean idExist(int id, Connection conn) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
@@ -56,21 +56,17 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public void insertMember(Member member) throws SQLException, DuplicateIDException {
+	public void insertMember(Member member) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
 			conn = getConnect();
-			if(!ssnExist(member.getId(), conn)) {
-				String query = "INSERT INTO member(id,name,email,phone) VALUES(seq_id.NEXTVAL,?,?,?)";
-				ps = conn.prepareStatement(query);
-				ps.setString(2, member.getName());
-				ps.setString(3, member.getEmail());
-				ps.setString(4, member.getPhone());
-				System.out.println(ps.executeUpdate()+" ROW INSERT OK");
-			} else {
-				throw new DuplicateIDException("Member is already exist");
-			}
+			String query = "INSERT INTO member(id,name,email,phone) VALUES(seq_id.NEXTVAL,?,?,?)";
+			ps = conn.prepareStatement(query);
+			ps.setString(1, member.getName());
+			ps.setString(2, member.getEmail());
+			ps.setString(3, member.getPhone());
+			System.out.println(ps.executeUpdate()+" ROW INSERT OK");
 		} finally {
 			closeAll(conn, ps);
 		}
@@ -79,31 +75,111 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void deleteMember(int id) throws SQLException, RecordNotFoundException {
-		// TODO Auto-generated method stub
-		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = getConnect();
+			if(idExist(id, conn)) {
+				String query = "DELETE member WHERE id=?";
+				ps = conn.prepareStatement(query);
+				ps.setInt(1, id);
+				System.out.println(ps.executeUpdate()+" ROW DELETE OK");
+			} else {
+				throw new RecordNotFoundException("Member is not found");
+			}
+		} finally {
+			closeAll(conn, ps);
+		}
 	}
 
 	@Override
 	public void updateMember(Member member) throws SQLException, RecordNotFoundException {
-		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = getConnect();
+			if(idExist(member.getId(), conn)) {
+				String query = "UPDATE member SET name=?,email=?,phone=? WHERE id=?";
+				ps = conn.prepareStatement(query);
+				ps.setString(1, member.getName());
+				ps.setString(2, member.getEmail());
+				ps.setString(3, member.getPhone());
+				ps.setInt(4, member.getId());
+				System.out.println(ps.executeUpdate()+" ROW UPDATE OK");
+			} else {
+				throw new RecordNotFoundException("Member is not found");
+			}
+		} finally {
+			closeAll(conn, ps);
+		}
 		
 	}
 
 	@Override
 	public Member getMember(int id) throws SQLException, RecordNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		Member member = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnect();
+			if(idExist(id, conn)) {
+				String query = "SELECT * FROM member WHERE id=?";
+				ps = conn.prepareStatement(query);
+				ps.setInt(1, id);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					member = new Member(rs.getInt("id"),rs.getString("name"),rs.getString("email"),rs.getString("phone"));
+				}
+			} else {
+				throw new RecordNotFoundException("Member is not found");
+			}
+		} finally {
+			closeAll(conn, ps, rs);
+		}
+		return member;
 	}
 
 	@Override
 	public ArrayList<Member> getMember() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Member> member = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnect();
+			String query = "SELECT * FROM member";
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				member.add(new Member(rs.getInt("id"),rs.getString("name"),rs.getString("email"),rs.getString("phone")));
+			}
+
+		} finally {
+			closeAll(conn, ps, rs);
+		}
+		return member;
 	}
 
 	@Override
 	public ArrayList<Member> getMember(String name) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Member> member = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnect();
+			String query = "SELECT * FROM member WHERE name=?";
+			ps = conn.prepareStatement(query);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				member.add(new Member(rs.getInt("id"),name,rs.getString("email"),rs.getString("phone")));
+			}
+
+		} finally {
+			closeAll(conn, ps, rs);
+		}
+		return member;
 	}
 }
