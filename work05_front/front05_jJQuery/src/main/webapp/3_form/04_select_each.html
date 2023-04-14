@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function() {
+	//1. 옵션 생성 버튼 클릭시...선택자/함수연결
+	$('#addOptionBtn').one('click',function(){
+		//2. friends에 해당하는 배열이 생성 + 그 item들이 select태그의 자식 option태그의 값으로...
+		var array = [];
+		array.push("문동은");
+		array.push("김연진");
+		array.push("손명호");
+		array.push("이사라");
+		$.each(array,function(index, item){
+			$('#friends').append('<option value='+item+'>'+item+'</option>');
+		});
+		//$('#addOptionBtn').unbind();
+	});//on
+	$('#deleteOptionBtn').on('click',function(){
+		var friend = $('#friends').val();
+		//$('#friends>option[value='+friend+']').remove();
+		$('#friends>option').remove();
+	});//on
+});//ready
+</script>
+</head>
+<body>
+	<input type="button" value="옵션 생성" id="addOptionBtn">
+	<input type="button" value="옵션 삭제" id="deleteOptionBtn">
+	<select id="friends">	
+	</select>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

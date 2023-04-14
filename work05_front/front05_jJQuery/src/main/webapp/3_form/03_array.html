@@ -1,0 +1,65 @@
+<!-- 
+val()	| html(),text()
+$.each(array,function(index, item){
+			
+});
+
+confirm("....하시겠습니까?") : 확인(true) | 취소(false)
+
+click(), bind('click'), on('click')!!
+change(),
+hover()
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(function() {
+		$('#eachBtn').click(function(){
+			//버튼 클릭시 배열 생성
+			var array = [];
+			array.push("문동은");
+			array.push("김연진");
+			array.push("손명호");
+			array.push("이사라");
+			//alert(array.length)//array check
+			
+			var data = '';
+			$.each(array,function(index, item){
+				data += item+" ";
+			});
+			//alert(data);
+			$('#resultView').html(data);
+		});//click
+	});
+</script>
+</head>
+<body>
+<input type="button" value="배열생성하고 each()적용" id="eachBtn">
+<p></p>
+<div id="resultView"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
