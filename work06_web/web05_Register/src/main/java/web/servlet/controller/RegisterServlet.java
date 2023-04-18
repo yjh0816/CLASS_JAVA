@@ -30,9 +30,12 @@ public class RegisterServlet extends HttpServlet {
 		
 		//4. 비즈니스 로직 호출....했다치고
 		
-		//5. (결과페이지로 바로 이동...)
-		RequestDispatcher rd = request.getRequestDispatcher("/register_result.jsp");
-		rd.forward(request, response); 
+		
+		//5. dto객체를 Attribute에 바인딩
+		request.setAttribute("dto", dto);
+		
+		//6. (결과페이지로 바로 이동...)
+		request.getRequestDispatcher("/register_result.jsp").forward(request, response); 
 	}
 
 }
