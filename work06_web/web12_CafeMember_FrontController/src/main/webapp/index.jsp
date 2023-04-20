@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +21,22 @@ a:hover {
 <body>
 <div class="container">
 	<div class="jumbotron" align="center">
-		<h1> DBЛ≈╟К▐≥Л°╪К║° Cafe Member Manage</h1>
+		<h1> DB©╛╣©ю╦╥н Cafe Member Manage</h1>
 	</div>
 	<ul>
-		<li><a href="register.jsp">М ▄Л⌡░ Й╟─Л·┘ М∙≤Й╦╟</a></li>
-		<li><a href="find.jsp">М ▄Л⌡░ Й╡─Л┐┴ М∙≤Й╦╟</a></li>
-		<li><a href="front.do?command=showAll">Л═└Л╡╢ М ▄Л⌡░ КЁ╢Й╦╟</a></li>
-		<li><a href="login.jsp">К║°Й╥╦Л²╦ М∙≤Й╦╟</a></li>
+		<li><a href="find.jsp">х╦©Ь ╟к╩Ж го╠Б</a></li>
+		<c:choose>
+
+			<c:when test="${!empty vo}">
+				<li><a href="front.do?command=showAll">юЭц╪ х╦©Ь ╨╦╠Б</a></li>
+				<li><a href="update.jsp">х╦©Ь а╓╨╦ ╪Жа╓го╠Б</a></li>
+				<li><a href="logout.jsp">╥н╠в╬ф©Т</a></li>	
+			</c:when>
+			<c:otherwise>
+				<li><a href="register.jsp">х╦©Ь ╟║ют го╠Б</a></li>
+				<li><a href="login.jsp">╥н╠вюн го╠Б</a></li>			
+			</c:otherwise>
+		</c:choose>
 	</ul>
 </div>
 </body>

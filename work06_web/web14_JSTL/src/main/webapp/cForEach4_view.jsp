@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>Register Result Page..</h2>
-<h3>${param.name}님 회원가입 성공^^</h3>
+<h2>우리 가게에서 판매되는 과일들 입니다.</h2>
+<c:forEach var="item" items="${list}">
+	<b>${item}</b>
+</c:forEach>
 </body>
 </html>

@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>Register Result Page..</h2>
-<h3>${param.name}님 회원가입 성공^^</h3>
+<b>정보 출력</b>
+${vo}<br>
+ID : ${vo.id} <br>
+NAME : ${vo.name} <br>
+ADDRESS : ${vo.address} <br>
 </body>
 </html>

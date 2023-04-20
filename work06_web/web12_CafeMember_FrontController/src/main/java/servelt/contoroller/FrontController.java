@@ -28,8 +28,8 @@ public class FrontController extends HttpServlet {
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 양방향 한글 처리
-		request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
+//		request.setCharacterEncoding("utf-8");
+//      response.setContentType("text/html;charset=utf-8");
         
         String command = request.getParameter("command");
         String path = "index.html";
@@ -41,10 +41,14 @@ public class FrontController extends HttpServlet {
         	path = login(request, response);
         } else if(command.equals("showAll")) {
         	path = showAll(request, response);
+        } else if(command.equals("update")) {
+        	path = update(request, response);
         }
         
         request.getRequestDispatcher(path).forward(request, response);
 	}//doProcess
+
+
 
 	private String register(HttpServletRequest request, HttpServletResponse response) {
         String id = request.getParameter("id");
@@ -112,5 +116,29 @@ public class FrontController extends HttpServlet {
 		return path;
 	}
 	
+	private String update(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        
+        MemberVO pvo = new MemberVO(id, password, name, address);
+        
+        String path = "index.html";
+        try {
+			MemberDAOImpl.getInstance().updateMember(pvo);
+			
+			//수정된 객체의 내용을 반드시 바인딩…세션.
+			HttpSession session = request.getSession();
+			if(session.getAttribute("vo")!=null) { //로그인 된 상태에서만 수정작업이 되도록
+				session.setAttribute("vo", pvo);
+			}
+			path = "update_result.jsp";
+		} catch (Exception e) {
+			
+		}
+        
+        return path;
+	}
 	
 }

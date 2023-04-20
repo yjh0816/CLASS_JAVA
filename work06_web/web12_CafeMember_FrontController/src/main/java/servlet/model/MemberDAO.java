@@ -17,7 +17,11 @@ public interface MemberDAO {
 	void registerMember(MemberVO vo) throws SQLException;
 	ArrayList<MemberVO> showAllMember() throws SQLException;
 	MemberVO findByIdMember(String id)throws SQLException;	
+	
+	//추가
 	MemberVO login(String id, String pass)throws SQLException;	
+	void updateMember(MemberVO vo) throws SQLException;
+	
 }
 
 

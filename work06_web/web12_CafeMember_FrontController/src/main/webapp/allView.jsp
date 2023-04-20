@@ -2,9 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<% 
-	ArrayList<MemberVO> list = (ArrayList)request.getAttribute("list");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,21 +17,22 @@
 <body>
 <div class="container">
 <h2> Member List</h2>
-<p>.The member class state...talbe tag...</p>
+<p>.The member class state...table tag...</p>
 <table class="table table-dark">
-<% 
-	for(MemberVO v : list){
-%>
+<tr>
+		<th>ID</th>
+		<th>NAME</th>
+		<th>ADDRESS</th>
+</tr>
+<c:forEach var="item" items="${list}">
 	<tr>
-		<td><%= v.getId() %></td>
-		<td><%= v.getName() %></td>
-		<td><%= v.getAddress() %></td>
+		<td>${item.id}</td>
+		<td>${item.name}</td>
+		<td>${item.address}</td>
 	</tr>
-<%
-	}	
-%>
+</c:forEach>
 </table>
-<h4 align="right"><a href="index.html">INDEX</a></h4>
+<h4 align="right"><a href="index.jsp">INDEX</a></h4>
 </div>
 </body>
 </html>
