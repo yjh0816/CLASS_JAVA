@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserMapper03">
+<mapper namespace="UserMapper05">
 	<insert id="addUser" parameterType="user" >
 		INSERT
 		INTO users(user_id, user_name, password, age, grade, reg_date)
@@ -23,6 +23,6 @@
 	<delete id="removeUser" parameterType="string">
 		DELETE
 		FROM users
-		WHERE user_id= #{VALUE}
+		WHERE user_id= #{userId}
 	</delete>
 </mapper>
