@@ -51,6 +51,7 @@ public class FileUploadController {
 		//다운로드 코드 추가
 		HashMap map = new HashMap();
 		map.put("path",path);
+		System.out.println("github upload test");
 		
 		return new ModelAndView("downloadView",map);
 	}
